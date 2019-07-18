@@ -229,7 +229,7 @@ function loadMap(){
         var data = result.data;
         var road = data.road;
 
-        for (let i = 0; i < road.length; i++) {
+        for (let i = 0; i < 72; i++) {
             var element = road[i];//
             var name = element.name;//
             var pointArray = element.pointarray;//
@@ -252,10 +252,11 @@ function loadMap(){
                   }),
                   stroke: new ol.style.Stroke({
                     color:'red',
-                    width:3
+                    width:1
                   })
                 })
             );//end setStyle
+            feature.set("name",name);
             var source = new ol.source.Vector({
                 features:[feature]
             });
@@ -265,5 +266,63 @@ function loadMap(){
             map.addLayer(layer);    
         }//end for
 
+        for (let i = 72; i < road.length; i++) {
+            var element = road[i];//
+            var name = element.name;//
+            var pointArray = element.pointarray;//
+            var coords = new Array;//用来存放坐标
+            for (let j = 0; j < pointArray.length; j++) {
+                var details = pointArray[j];
+                var lon = parseFloat(details.lon);
+                var lat = parseFloat(details.lat);
+                var lonlat = new Array;
+                lonlat.push(lon,lat);
+                var poord = new ol.proj.transform(lonlat,'EPSG:4326', 'EPSG:3857')
+                coords.push(poord);
+            }//end for
+            var feature = new ol.Feature(
+                new ol.geom.LineString(coords),
+            );//end feature
+            feature.setStyle(new ol.style.Style({
+                fill: new ol.style.Fill({
+                    color: 'blue',
+                  }),
+                  stroke: new ol.style.Stroke({
+                    color:'blue',
+                    width:3
+                  })
+                })
+            );//end setStyle
+            feature.set("name",name);
+            var source = new ol.source.Vector({
+                features:[feature]
+            });
+            var layer = new ol.layer.Vector({
+                source: source
+            });
+            map.addLayer(layer);    
+        }//end for
+
+        //加载一个鼠标点击显示信息的事件
+        /**
+         * 点击要素
+         */
+        function clickMapFeature(event){
+            // this.$options.methods.showDtailsInMap(newfeature.values_.hdtgGeometry);
+            var pixel = map.getEventPixel(event.originalEvent);
+            map.forEachFeatureAtPixel(pixel,function(feature,layer){
+            if (feature != undefined) {
+                console.log("选择的要素：",feature.name);
+            }
+            })
+        };
+        map.on('click',function(event){
+            var pixel = map.getEventPixel(event.originalEvent);
+            map.forEachFeatureAtPixel(pixel,function(feature,layer){
+            if (feature != undefined) {
+                alert(feature.S.name);
+                }
+            })
+        })
     }//end successLoadRoute
 }
