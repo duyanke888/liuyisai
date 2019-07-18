@@ -211,13 +211,45 @@ function loadMap(){
 
     //全局变量
     var pointDic = [];
-    var jsonData = [{}];
+    // var jsonData = [{}];
+    var jsonData=[];
+
+    //加载聚类线
+    getLine();
+    console.log("jsonData:",jsonData);
 
     //加载聚类点
     getPoint(map);
-    console.log("jsonData:",jsonData);
-    //加载聚类线
-    getLine(map);
+
+//********************************************************************************************
+//********************************************************************************************
+//***线相关************************************************************************************
+//********************************************************************************************
+//定义聚类点函数
+function getLine(){
+    $.ajax({
+        type:"POST",
+        url:'./WEB-INF/source/d_szhd_hx.json',
+        dataType:'json',
+        async: false,
+        success:function(data){
+            successLoadLine(data);//成功读取JSON文件后加载此函数
+        }
+    })
+}
+    
+    function successLoadLine(data){
+        var records_line = data.RECORDS;
+        
+        for (var i = 0; i < records_line.length; i++) {
+            var id = records_line[i].ID;
+            var name = records_line[i].NAME;
+            var pointArray__ = records_line[i].POINTARRAY;
+            var pointArray = pointArray__.split(',');
+            jsonData.push(pointArray);       
+        }
+    }
+
 
 //********************************************************************************************
 //********************************************************************************************
@@ -231,15 +263,9 @@ function loadMap(){
             asysnc:false,
             dataType:'json',
             success:function(data){
-                //getJSONData(data);//得到json数据
                 successLoadPoint(data);//成功读取JSON文件后加载此函数
             }
         })
-    }
-    //得到json数据
-    function getJSONData(data){
-        jsonData = data.RECORDS;
-        console.log(jsonData);
     }
 
     //点相关函数
@@ -257,7 +283,6 @@ function loadMap(){
         // console.log("id:",aaa);
 
         for (var i = 0; i < length; i++) {
-            jsonData.push(records[i]);
             var id = records[i].ID;
             var basetype = records[i].BASETYPE;
 
@@ -267,8 +292,6 @@ function loadMap(){
                 var end_lon = records[i].END_LON;
                 pointsArray.push([end_lon,end_lat]);
                 
-                //pointDic[id] = [end_lon,end_lat];
-                //pointDic.add(id,[end_lon,end_lat]);//存成字典的形式
                 pointDic.push(id,[end_lon,end_lat]);               
             }
 
@@ -376,43 +399,6 @@ function loadMap(){
             });
             map.addLayer(layer_clustering);
         }
-
-//********************************************************************************************
-//********************************************************************************************
-//***线相关************************************************************************************
-//********************************************************************************************
-//定义聚类点函数
-function getLine(map){
-    $.ajax({
-        type:"POST",
-        url:'./WEB-INF/source/d_szhd_hx.json',
-        dataType:'json',
-        async: false,
-        success:function(data){
-            successLoadLine(data);//成功读取JSON文件后加载此函数
-        }
-    })
-    
-    function successLoadLine(data){
-        var records_line = data.RECORDS;
-        
-        for (var i = 0; i < records_line.length; i++) {
-            var id = records_line[i].ID;
-            var name = records_line[i].NAME;
-            var pointArray__ = records_line[i].POINTARRAY;
-            var pointArray = pointArray__.split(',');
-            var points = new Array;
-            for (var j = 0; j < pointArray.length; j++) {
-                var id = pointArray[j];
-                var lat = getByID(id,jsonData,"lat");
-                var lon = getByID(id,jsonData,"lon");
-                points.push([lon,lat]);
-            }
-            drawLine(points);            
-        }
-    }
-}
-
 }
 
 //*******************************************************************************************
