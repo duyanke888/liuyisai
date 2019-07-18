@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!--定义HTML文档的元数据-->
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>openlayers演示</title>
+    <!--加载准备文件，包括：css文件，Bootstrap文件-->
+    <!--基本样式CSS--><link rel="stylesheet" type="text/css" href="./WEB-INF/css/base.css">
+    <!--Bootstrap文件--><link rel="stylesheet" href="./WEB-INF/bootstrap/css/bootstrap.min.css">
+    <script src="./WEB-INF/bootstrap/js/jquery.min.js"></script>
+    <script src="./WEB-INF/bootstrap/js/bootstrap.min.js"></script>
+
+    <!--加载openlayers相关文件-->
+    <script type="text/javascript" src="./WEB-INF/openlayers/4.2.0/ol.js"></script>
+</head>
+
+<body>
+    <!--加载自建js文件-->
+    <script type="text/javascript" src="./WEB-INF/js/main.js"></script><!--创建地图-->
+
+    <div id="map">
+        <div id="mouse-position"></div>
+    </div>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            main();//创建地图
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,22 @@
+/*
+    杜衍珂
+*/
+*{
+    margin: 0%;
+    padding: 0;
+}
+title{
+    color:red;
+}
+body{
+    background-color: black;
+}
+h1,h4{
+    color:red ; 
+    font-size:50px;
+    display: inline;
+}
+map{
+    width: 50%;
+    height:50%;
+}
