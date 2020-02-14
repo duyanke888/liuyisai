@@ -295,7 +295,7 @@ function loadMap1() {
     //********************************************************************************************
     function drawPointLine(map) {
         $.ajax({
-            type: "POST",
+            type: "get",
             url: './WEB-INF/source/1002route.json',//应该换为远程接口
             asysnc: false,
             success: function (result) {
@@ -322,7 +322,7 @@ function loadMap1() {
 
     function drawGaocenghangxian(map) {
         $.ajax({
-            type: "POST",
+            type: "get",
             // url:'./WEB-INF/source/gaocenghangxian0928.txt',//应该换为远程接口
             url: './WEB-INF/source/gaocenghangxian0928.txt',//应该换为远程接口
             asysnc: false,
@@ -375,7 +375,7 @@ function loadMap1() {
 
     function readUrl1(map) {
         $.ajax({
-            type: "POST",
+            type: "get",
             // url:'./WEB-INF/source/hx.json',//应该换为远程接口
             url: './WEB-INF/source/hx0925.json',
             asysnc: false,
@@ -519,7 +519,7 @@ function loadMap1() {
 
     function readUrl(map) {
         $.ajax({
-            type: "POST",
+            type: "get",
             // url:'./WEB-INF/source/hx.json',//应该换为远程接口
             url: './WEB-INF/source/hx0927.json',
             asysnc: false,
@@ -667,7 +667,7 @@ function loadMap1() {
     //定义聚类点函数
     function getPoint(map) {
         $.ajax({
-            type: "POST",
+            type: "get",
             // url:'./WEB-INF/source/d_szhd_feature.json',
             url: './WEB-INF/source/jiedian092502.json',
             asysnc: false,
