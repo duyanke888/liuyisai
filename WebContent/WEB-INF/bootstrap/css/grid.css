@@ -1,0 +1,43 @@
+body {
+  padding-top: 30px;
+  padding-bottom: 20px;
+}
+a {
+  display:block;
+}
+a:hover {
+  color:#4499EE;
+  text-decoration:none; 
+}
+
+
+h4 {
+  margin-top: 25px;
+}
+.row_center {
+  margin-bottom: 20px;
+  text-align:center;
+}
+.row {
+  margin-bottom: 20px;
+}
+.row .row {
+  margin-top: 10px;
+  margin-bottom: 0;
+}
+.col-md-6 {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  background-color: #FFF;
+  border: 1px solid #ddd;
+}
+.col-md-12 {
+  background-color: #EEE;
+}
+hr {
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+.container-content {
+  background-color: #EEE;
+}
